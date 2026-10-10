@@ -3,50 +3,33 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>مُحارِب | تسجيل الدخول</title>
-  <link rel="stylesheet" href="style.css">
+  <title>مُحارِب</title>
+  <link rel="stylesheet" href="css/style.css">
 </head>
-<body class="login-page">
-
-  <main class="card">
-    <h1 id="title">أهلاً بالمحارب الجديد!</h1>
-    <p class="intro">
-      «مُحارِب» هي منصة للنصر في حرب الإدمان عن طريق تدريبات ومتابعات.
-      هل أنت مستعد لخوض خِضَمّ الحروب؟ هيا بنا!
-    </p>
-
-    <form id="new-form" autocomplete="off" novalidate>
-      <label for="warrior-name">اسم المحارب</label>
-      <input type="text" id="warrior-name" maxlength="30" placeholder="اكتب اسمك أو لقبك">
-
-      <label for="warrior-why">لماذا تحارب؟</label>
-      <textarea id="warrior-why" rows="2" maxlength="300" placeholder="اكتب سببك الذي يمنحك القوة"></textarea>
-
-      <p class="error" id="new-error" role="alert" hidden></p>
-      <button type="submit" class="btn btn-primary">انضم إلى الحرب</button>
-    </form>
-
-    <a href="#" id="toggle-old" class="old-link">محارب قديم؟ عُد إلى صفوف الحرب!</a>
-
-    <form id="old-form" autocomplete="off" novalidate hidden>
-      <label for="old-code">كود المحارب (حرف ورقمان)</label>
-      <input type="text" id="old-code" maxlength="3" dir="ltr" class="code-input" placeholder="A12" inputmode="text">
-      <p class="error" id="old-error" role="alert" hidden></p>
-      <button type="submit" class="btn btn-primary">العودة إلى الحرب</button>
-      <a href="#" id="back-new" class="old-link">محارب جديد؟ سجّل من هنا</a>
-    </form>
-  </main>
-
-  <div class="overlay" id="code-modal" hidden>
-    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
-      <h2 id="modal-title">مرحباً بك يا <span id="modal-name"></span>!</h2>
-      <p>هذا هو كودك الخاص. احتفظ به جيداً، فهو مفتاح عودتك إلى صفوف الحرب:</p>
-      <div class="code-box" id="modal-code" dir="ltr"></div>
-      <button type="button" id="enter-btn" class="btn btn-primary">دخول إلى ساحة الحرب</button>
+<body>
+  <main class="box">
+    <div id="intro">
+      <h1>أهلا بالمحارب الجديد!</h1>
+      <p>"محارب" هي منصة للنصر في حرب الإدمان عن طريق تدريبات ومتابعات، هل انت مستعد لخوض خِضَم الحروب؟ هيا بنا!</p>
     </div>
-  </div>
 
-  <script src="storage.js"></script>
-  <script src="login.js"></script>
+    <form id="signup">
+      <label for="name">اسم المحارب:</label>
+      <input id="name" type="text" required autocomplete="off">
+      <label for="why">لماذا تحارب؟</label>
+      <input id="why" type="text" required autocomplete="off">
+      <button type="submit">ابدأ</button>
+      <p class="old">محارب قديم؟ <a href="returning.html">عُد إلى صفوف الحرب!</a> عن طريق كود مكوّن من حرف ورقمين يُعطاه عندما يسجل دخول لأول مرة</p>
+    </form>
+
+    <div id="done" class="hidden">
+      <h1>كودك:</h1>
+      <p class="code" id="code"></p>
+      <p>احتفظ به، ستحتاجه للعودة.</p>
+      <a href="empty.html"><button type="button">متابعة</button></a>
+    </div>
+  </main>
+  <script src="js/common.js"></script>
+  <script src="js/main.js"></script>
 </body>
 </html>
