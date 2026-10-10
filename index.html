@@ -449,9 +449,9 @@ input[type=range] { direction: ltr; flex: 1; min-width: 0; padding: 0; margin: 0
       renderUser();
     });
 
-    // استعادة الجلسة
-    var saved = localStorage.getItem(CUR);
-    if (saved && allUsers()[saved]) enterApp(saved);
+    // عند فتح الصفحة أو إعادة تحميلها تبدأ دائماً من الواجهة الأولى
+    localStorage.removeItem(CUR);
+    showSignup();
   </script>
 </body>
 </html>
