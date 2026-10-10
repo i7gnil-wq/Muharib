@@ -1,4 +1,3 @@
-/* storage.js — تخزين بيانات المحاربين في المتصفح (localStorage) */
 (function () {
   "use strict";
 
@@ -23,7 +22,6 @@
     }
   }
 
-  // كود من حرف لاتيني كبير + رقمين، مثل: A07
   function generateCode(existing) {
     var letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     for (var i = 0; i < 5000; i++) {

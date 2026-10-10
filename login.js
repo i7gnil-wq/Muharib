@@ -1,4 +1,3 @@
-/* login.js — منطق واجهة تسجيل الدخول */
 (function () {
   "use strict";
 
@@ -24,7 +23,6 @@
     window.location.href = "warrior.html";
   }
 
-  // تحويل الأرقام العربية/الفارسية إلى لاتينية
   function normalizeDigits(str) {
     return str
       .replace(/[٠-٩]/g, function (d) {
@@ -35,7 +33,6 @@
       });
   }
 
-  // محارب جديد
   newForm.addEventListener("submit", function (e) {
     e.preventDefault();
     var err = $("new-error");
@@ -61,7 +58,6 @@
 
   $("enter-btn").addEventListener("click", goToWarriorPage);
 
-  // محارب قديم
   toggleOld.addEventListener("click", function () {
     var open = oldForm.hidden;
     oldForm.hidden = !open;
