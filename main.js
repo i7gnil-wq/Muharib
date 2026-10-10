@@ -13,7 +13,7 @@ form.addEventListener("submit", function (e) {
   Muharib.save(users);
 
   document.getElementById("code").textContent = code;
-  form.classList.add("hidden");
-  document.getElementById("intro").classList.add("hidden");
-  done.classList.remove("hidden");
+  form.hidden = true;
+  document.getElementById("intro").hidden = true;
+  done.hidden = false;
 });

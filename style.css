@@ -9,7 +9,7 @@
   --btn-blue: #5b7391;
   --btn-gray: #667282;
   --btn-text: #e3e9f0;
-  --wine: #c25a6e;
+  --accent: #9fb3cf;
 }
 * { box-sizing: border-box; }
 html, body { margin: 0; min-height: 100%; }
@@ -46,8 +46,8 @@ button {
   cursor: pointer; border-radius: 6px;
 }
 button:hover { background: var(--btn-gray); }
-.old { color: var(--wine); font-weight: 600; margin-top: 14px; }
-.old a { color: var(--wine); text-decoration: underline; }
-.err { color: var(--wine); font-size: .85rem; min-height: 1.2em; margin: 0 0 8px; }
+.old { color: var(--accent); font-weight: 600; margin-top: 14px; }
+.old a { color: var(--accent); text-decoration: underline; }
+.err { color: var(--accent); font-size: .85rem; min-height: 1.2em; margin: 0 0 8px; }
 .code { font-size: 1.8rem; letter-spacing: 4px; direction: ltr; text-align: right; margin: 0 0 12px; }
-.hidden { display: none; }
+[hidden] { display: none !important; }

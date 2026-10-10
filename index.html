@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>مُحارِب</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="box">
+    <div id="intro">
+      <h1>أهلا بالمحارب الجديد!</h1>
+      <p>"محارب" هي منصة للنصر في حرب الإدمان عن طريق تدريبات ومتابعات، هل انت مستعد لخوض خِضَم الحروب؟ هيا بنا!</p>
+    </div>
+
+    <form id="signup">
+      <label for="name">اسم المحارب:</label>
+      <input id="name" type="text" required autocomplete="off">
+      <label for="why">لماذا تحارب؟</label>
+      <input id="why" type="text" required autocomplete="off">
+      <button type="submit">ابدأ</button>
+      <p class="old">محارب قديم؟ <a href="returning.html">عُد إلى صفوف الحرب!</a> عن طريق كود مكوّن من حرف ورقمين يُعطاه عندما يسجل دخول لأول مرة</p>
+    </form>
+
+    <div id="done" hidden>
+      <h1>كودك:</h1>
+      <p class="code" id="code"></p>
+      <p>احتفظ به، ستحتاجه للعودة.</p>
+      <a href="empty.html"><button type="button">متابعة</button></a>
+    </div>
+  </main>
+  <script src="common.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>
