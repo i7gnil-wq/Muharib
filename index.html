@@ -9,13 +9,6 @@
 <body class="login-page">
 
   <main class="card">
-    <div class="emblem" aria-hidden="true">
-      <svg viewBox="0 0 64 64" width="64" height="64">
-        <path d="M32 4 8 14v16c0 15 10 26 24 30 14-4 24-15 24-30V14L32 4z" fill="none" stroke="currentColor" stroke-width="4" stroke-linejoin="round"/>
-        <path d="M32 18v26M24 26h16" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
-      </svg>
-    </div>
-
     <h1>أهلاً بالمحارب الجديد!</h1>
     <p class="intro">
       «مُحارِب» هي منصة للنصر في حرب الإدمان عن طريق تدريبات ومتابعات.
@@ -27,15 +20,13 @@
       <input type="text" id="warrior-name" maxlength="30" placeholder="اكتب اسمك أو لقبك">
 
       <label for="warrior-why">لماذا تحارب؟</label>
-      <textarea id="warrior-why" rows="3" maxlength="300" placeholder="اكتب سببك الذي يمنحك القوة"></textarea>
+      <textarea id="warrior-why" rows="2" maxlength="300" placeholder="اكتب سببك الذي يمنحك القوة"></textarea>
 
       <p class="error" id="new-error" role="alert" hidden></p>
       <button type="submit" class="btn btn-primary">انضم إلى الحرب</button>
     </form>
 
-    <div class="divider"><span>أو</span></div>
-
-    <button type="button" id="toggle-old" class="btn btn-link" aria-expanded="false" aria-controls="old-form">
+    <button type="button" id="toggle-old" class="old-link" aria-expanded="false" aria-controls="old-form">
       محارب قديم؟ عُد إلى صفوف الحرب!
     </button>
 
