@@ -1,6 +1,6 @@
 :root {
   --bg: #0a1325;
-  --panel: rgba(34, 56, 94, .35);
+  --panel: #13213b;
   --panel-border: #2a3d5e;
   --field: #0c172c;
   --field-border: #22365a;
@@ -25,29 +25,30 @@ body {
   text-align: right;
 }
 .box {
-  max-width: 380px; padding: 16px; margin: 10px;
+  max-width: 290px; padding: 11px 12px; margin: 8px;
   background: var(--panel);
   border: 1px solid var(--panel-border);
-  border-radius: 8px;
+  border-radius: 6px;
 }
-h1 { font-size: 1.3rem; margin: 0 0 6px; color: var(--text); }
-p { margin: 0 0 12px; line-height: 1.7; font-size: .95rem; }
-label { display: block; font-size: .9rem; margin-bottom: 3px; color: var(--muted); }
+h1 { font-size: 1.05rem; font-weight: 600; margin: 0 0 4px; color: var(--text); }
+p { margin: 0 0 9px; line-height: 1.55; font-size: .82rem; }
+label { display: block; font-size: .8rem; margin-bottom: 2px; color: var(--muted); }
 input {
-  width: 100%; padding: 8px 10px; margin-bottom: 10px;
+  width: 100%; padding: 4px 8px; margin-bottom: 7px; font-size: .85rem;
   background: var(--field); color: var(--text);
-  border: 1px solid var(--field-border); border-radius: 6px;
-  font: inherit; direction: rtl; text-align: right;
+  border: 1px solid var(--field-border); border-radius: 4px;
+  font: inherit; font-size: .85rem; direction: rtl; text-align: right;
 }
 input:focus { outline: 1px solid var(--btn-blue); }
 button {
   background: var(--btn-blue); color: var(--btn-text);
-  border: 1px solid #6f88a6; padding: 8px 20px; font: inherit;
-  cursor: pointer; border-radius: 6px;
+  border: 1px solid #6f88a6; padding: 5px 14px; font: inherit; font-size: .85rem;
+  cursor: pointer; border-radius: 4px;
 }
 button:hover { background: var(--btn-gray); }
-.old { color: var(--accent); font-weight: 600; margin-top: 14px; }
+button.full { width: 100%; }
+.old { color: var(--accent); font-weight: 600; margin: 10px 0 0; }
 .old a { color: var(--accent); text-decoration: underline; }
 .err { color: var(--accent); font-size: .85rem; min-height: 1.2em; margin: 0 0 8px; }
-.code { font-size: 1.8rem; letter-spacing: 4px; direction: ltr; text-align: right; margin: 0 0 12px; }
+.code { font-size: 1.4rem; letter-spacing: 3px; direction: ltr; text-align: right; margin: 0 0 12px; }
 [hidden] { display: none !important; }
