@@ -58,11 +58,24 @@
 
   $("enter-btn").addEventListener("click", goToWarriorPage);
 
-  toggleOld.addEventListener("click", function () {
-    var open = oldForm.hidden;
-    oldForm.hidden = !open;
-    toggleOld.setAttribute("aria-expanded", String(open));
-    if (open) $("old-code").focus();
+  function showReturnView(show) {
+    newForm.hidden = show;
+    toggleOld.hidden = show;
+    oldForm.hidden = !show;
+    $("title").textContent = show ? "أهلاً بعودتك أيها المحارب!" : "أهلاً بالمحارب الجديد!";
+    hideError($("new-error"));
+    hideError($("old-error"));
+    if (show) $("old-code").focus();
+  }
+
+  toggleOld.addEventListener("click", function (e) {
+    e.preventDefault();
+    showReturnView(true);
+  });
+
+  $("back-new").addEventListener("click", function (e) {
+    e.preventDefault();
+    showReturnView(false);
   });
 
   oldForm.addEventListener("submit", function (e) {

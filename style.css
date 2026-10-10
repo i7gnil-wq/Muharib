@@ -1,10 +1,10 @@
 :root {
-  --beige: #ddd0b4;
-  --beige-light: #e9dec6;
-  --beige-dark: #c9b994;
-  --gray: #5a5a5a;
-  --gray-dark: #2f2f2f;
-  --gray-light: #8f8f8f;
+  --beige: #cdbf9f;
+  --beige-light: #ddd0b4;
+  --beige-dark: #b8a67e;
+  --gray: #666666;
+  --gray-dark: #414141;
+  --gray-light: #9a9a9a;
   --red: #b3261e;
   --red-dark: #8c1d17;
   --radius: 14px;
@@ -46,46 +46,46 @@ body {
 
 .card {
   width: 100%;
-  max-width: 460px;
+  max-width: 380px;
   background: var(--beige-light);
-  border: 2px solid var(--gray);
+  border: 2px solid var(--gray-light);
   border-top: 8px solid var(--red);
   border-radius: var(--radius);
-  padding: 22px 20px 20px;
-  box-shadow: 0 10px 30px rgba(47, 47, 47, 0.22);
+  padding: 18px 18px 16px;
+  box-shadow: 0 10px 30px rgba(47, 47, 47, 0.25);
 }
 
 h1 {
-  margin: 0 0 8px;
-  font-size: 1.7rem;
+  margin: 0 0 6px;
+  font-size: 1.6rem;
   color: var(--red);
 }
 
 .intro {
-  margin: 0 0 14px;
+  margin: 0 0 10px;
   color: var(--gray);
-  font-size: 0.98rem;
+  font-size: 0.95rem;
 }
 
 label {
   display: block;
-  margin: 10px 0 4px;
+  margin: 8px 0 3px;
   font-weight: 700;
-  font-size: 0.95rem;
+  font-size: 0.88rem;
   color: var(--gray-dark);
 }
 
 input,
 textarea {
   width: 100%;
-  padding: 7px 10px;
+  padding: 4px 8px;
   font: inherit;
-  font-size: 0.95rem;
+  font-size: 0.88rem;
   line-height: 1.4;
   color: var(--gray-dark);
-  background: #f8f3e6;
-  border: 2px solid var(--gray-light);
-  border-radius: 8px;
+  background: #ebe2cc;
+  border: 1.5px solid var(--gray-light);
+  border-radius: 6px;
   outline: none;
   transition: border-color 0.15s, box-shadow 0.15s;
 }
@@ -97,12 +97,12 @@ textarea {
 input:focus,
 textarea:focus {
   border-color: var(--red);
-  box-shadow: 0 0 0 3px rgba(179, 38, 30, 0.18);
+  box-shadow: 0 0 0 2px rgba(179, 38, 30, 0.2);
 }
 
 .code-input {
   text-align: center;
-  font-size: 1.25rem;
+  font-size: 1.1rem;
   letter-spacing: 0.3em;
   text-transform: uppercase;
 }
@@ -110,12 +110,13 @@ textarea:focus {
 .btn {
   display: block;
   width: 100%;
-  margin-top: 12px;
-  padding: 9px 14px;
+  margin-top: 10px;
+  padding: 6px 12px;
   font: inherit;
+  font-size: 0.92rem;
   font-weight: 700;
-  border: 2px solid transparent;
-  border-radius: 8px;
+  border: 0;
+  border-radius: 6px;
   cursor: pointer;
   transition: background 0.15s, transform 0.05s;
 }
@@ -133,26 +134,12 @@ textarea:focus {
   background: var(--red-dark);
 }
 
-.btn-secondary {
-  background: var(--gray);
-  color: #fff;
-}
-
-.btn-secondary:hover {
-  background: var(--gray-dark);
-}
-
 .old-link {
   display: block;
-  margin: 16px 0 0;
-  padding: 0;
-  font: inherit;
-  font-size: 0.98rem;
-  line-height: 1.7;
-  text-align: start;
-  color: var(--gray);
-  background: none;
-  border: 0;
+  margin: 12px 0 0;
+  font-size: 0.95rem;
+  color: var(--red-dark);
+  text-decoration: none;
   cursor: pointer;
 }
 
@@ -162,12 +149,12 @@ textarea:focus {
 
 .error {
   margin: 8px 0 0;
-  padding: 6px 10px;
+  padding: 5px 10px;
   color: var(--red-dark);
   background: rgba(179, 38, 30, 0.1);
   border-right: 4px solid var(--red);
   border-radius: 6px;
-  font-size: 0.9rem;
+  font-size: 0.88rem;
 }
 
 .overlay {
@@ -183,17 +170,17 @@ textarea:focus {
 
 .modal {
   width: 100%;
-  max-width: 400px;
-  padding: 22px 20px;
+  max-width: 380px;
+  padding: 18px;
   text-align: start;
   background: var(--beige-light);
-  border: 2px solid var(--gray);
+  border: 2px solid var(--gray-light);
   border-top: 8px solid var(--red);
   border-radius: var(--radius);
 }
 
 .modal h2 {
-  margin: 0 0 8px;
+  margin: 0 0 6px;
   color: var(--red);
 }
 
@@ -203,17 +190,17 @@ textarea:focus {
 }
 
 .code-box {
-  margin: 14px auto 4px;
-  padding: 8px 0;
-  max-width: 200px;
+  margin: 12px auto 2px;
+  padding: 6px 0;
+  max-width: 180px;
   text-align: center;
-  font-size: 2.2rem;
+  font-size: 2rem;
   font-weight: 800;
   letter-spacing: 0.3em;
   padding-left: 0.3em;
   color: #fff;
   background: var(--gray-dark);
-  border-radius: 8px;
+  border-radius: 6px;
 }
 
 .empty-page {

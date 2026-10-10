@@ -9,7 +9,7 @@
 <body class="login-page">
 
   <main class="card">
-    <h1>أهلاً بالمحارب الجديد!</h1>
+    <h1 id="title">أهلاً بالمحارب الجديد!</h1>
     <p class="intro">
       «مُحارِب» هي منصة للنصر في حرب الإدمان عن طريق تدريبات ومتابعات.
       هل أنت مستعد لخوض خِضَمّ الحروب؟ هيا بنا!
@@ -26,15 +26,14 @@
       <button type="submit" class="btn btn-primary">انضم إلى الحرب</button>
     </form>
 
-    <button type="button" id="toggle-old" class="old-link" aria-expanded="false" aria-controls="old-form">
-      محارب قديم؟ عُد إلى صفوف الحرب!
-    </button>
+    <a href="#" id="toggle-old" class="old-link">محارب قديم؟ عُد إلى صفوف الحرب!</a>
 
     <form id="old-form" autocomplete="off" novalidate hidden>
       <label for="old-code">كود المحارب (حرف ورقمان)</label>
       <input type="text" id="old-code" maxlength="3" dir="ltr" class="code-input" placeholder="A12" inputmode="text">
       <p class="error" id="old-error" role="alert" hidden></p>
-      <button type="submit" class="btn btn-secondary">العودة إلى الحرب</button>
+      <button type="submit" class="btn btn-primary">العودة إلى الحرب</button>
+      <a href="#" id="back-new" class="old-link">محارب جديد؟ سجّل من هنا</a>
     </form>
   </main>
 
