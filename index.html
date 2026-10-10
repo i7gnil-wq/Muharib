@@ -24,11 +24,7 @@
 * { box-sizing: border-box; }
 html, body { margin: 0; }
 body {
-  background:
-    linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px) 0 0 / 22px 22px,
-    linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px) 0 0 / 22px 22px,
-    radial-gradient(ellipse at top, #1a1a1a 0%, var(--bg) 70%);
-  background-attachment: fixed;
+  background: var(--bg);
   color: var(--text);
   font-family: "IBM Plex Sans Arabic", Tahoma, Arial, sans-serif;
   direction: rtl;
@@ -68,10 +64,50 @@ button.full { width: 100%; }
 .line { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
 .line label { margin: 0; white-space: nowrap; }
 .line input { margin: 0; flex: 1; min-width: 0; }
+.wrap { width: 100%; max-width: 260px; margin: 8px auto; }
+.wrap .box { margin: 0; max-width: none; }
+.back { background: none; border: 0; padding: 0; margin-top: 10px; color: var(--muted); font-size: .76rem; }
+.back:hover { background: none; color: var(--text); }
 .err:empty { display: none; }
 .row { display: flex; align-items: baseline; gap: 8px; margin-bottom: 8px; }
 .row h1 { margin: 0; }
 .code { font-size: 1.25rem; letter-spacing: 3px; direction: ltr; text-align: right; margin: 0; }
+.ic { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; flex: none; }
+.app { width: calc(100% - 20px); max-width: 560px; margin: 10px auto; align-self: flex-start; }
+.bar { display: flex; align-items: center; gap: 9px; background: var(--panel); border: 1px solid var(--panel-border); border-radius: 8px; padding: 8px 10px; }
+.uname { font-weight: 600; font-size: .88rem; color: var(--text); }
+.ucode { direction: ltr; text-align: right; font-size: .74rem; color: var(--muted); letter-spacing: 1px; }
+.avatar { width: 38px; height: 38px; border-radius: 50%; border: 1px solid var(--btn-blue); background: var(--field) center / cover no-repeat; color: var(--btn-blue); display: flex; align-items: center; justify-content: center; font-weight: 600; flex: none; }
+.avatar.big { width: 56px; height: 56px; font-size: 1.2rem; }
+.ghost { background: transparent; color: var(--muted); border: 1px solid var(--panel-border); }
+.ghost:hover { background: #1c1c1c; color: var(--text); }
+.pill { margin-inline-start: auto; display: flex; align-items: center; gap: 6px; border-radius: 16px; padding: 5px 11px; }
+.overlay { position: fixed; inset: 0; z-index: 10; background: rgba(0,0,0,.8); display: flex; align-items: center; justify-content: center; padding: 12px; }
+.modal { width: 100%; max-width: 340px; max-height: 92vh; overflow: auto; background: var(--panel); border: 1px solid var(--panel-border); border-radius: 10px; padding: 12px; }
+.modal h2 { font-size: .95rem; font-weight: 600; margin: 0; color: var(--text); }
+.sub { color: var(--muted); font-size: .74rem; margin: 3px 0 10px; }
+.mhead { display: flex; align-items: baseline; gap: 8px; margin-bottom: 10px; }
+.mhead .sub { margin: 0; }
+.prof { display: flex; align-items: center; gap: 8px; }
+.col { display: flex; flex-direction: column; gap: 5px; }
+.col.grow { flex: 1; min-width: 0; }
+.col input { margin: 0; }
+hr { border: 0; border-top: 1px solid var(--panel-border); margin: 12px 0; }
+.item { width: 100%; display: flex; align-items: center; gap: 8px; background: transparent; color: var(--text); border: 1px solid var(--panel-border); border-radius: 6px; padding: 7px 9px; margin-bottom: 6px; }
+.item:hover { background: #1c1c1c; }
+.item .ic { color: var(--accent); }
+.item.danger span { color: var(--accent); }
+.wide { width: 100%; margin-top: 4px; padding: 7px 12px; }
+.cropwrap { display: flex; justify-content: center; margin: 4px 0 6px; }
+#crop { width: 200px; height: 200px; border-radius: 50%; border: 2px solid var(--btn-blue); background: var(--field); touch-action: none; cursor: grab; }
+.hint { text-align: center; color: var(--muted); font-size: .74rem; margin: 0 0 8px; }
+.sliders { display: flex; gap: 12px; margin-bottom: 10px; }
+.sl { display: flex; align-items: center; gap: 6px; flex: 1; margin: 0; color: var(--muted); }
+input[type=range] { direction: ltr; flex: 1; min-width: 0; padding: 0; margin: 0; border: 0; background: transparent; accent-color: var(--btn-blue); }
+.acts { display: flex; gap: 8px; }
+.acts button { padding: 7px 12px; }
+.acts .ghost { flex: 1; }
+.acts #insert-photo { flex: 2; }
 [hidden] { display: none !important; }
 
   </style>
@@ -102,26 +138,82 @@ button.full { width: 100%; }
   </main>
 
   <!-- واجهة المحارب القديم -->
-  <main class="box" id="view-returning" hidden>
-    <form id="returning">
-      <div class="line">
-        <label for="code">الرمز الحربي:</label>
-        <input id="code" type="text" maxlength="3" required autocomplete="off">
-      </div>
-      <p class="err" id="err"></p>
-      <button type="submit" class="full">دخول</button>
-    </form>
-  </main>
+  <div class="wrap" id="view-returning" hidden>
+    <main class="box">
+      <form id="returning">
+        <div class="line">
+          <label for="code">الرمز الحربي:</label>
+          <input id="code" type="text" maxlength="3" required autocomplete="off">
+        </div>
+        <p class="err" id="err"></p>
+        <button type="submit" class="full">دخول</button>
+      </form>
+    </main>
+    <button type="button" class="back" id="back">العودة إلى المحارب الجديد</button>
+  </div>
 
-  <!-- الواجهة الفارغة: لا يوجد داخلها شيء -->
+  <!-- الواجهة الرئيسية -->
+  <div class="app" id="view-app" hidden>
+    <div class="bar">
+      <div class="who">
+        <div class="uname" id="u-name"></div>
+        <div class="ucode" id="u-code"></div>
+      </div>
+      <div class="avatar" id="avatar"></div>
+      <button type="button" class="ghost pill" id="open-settings"><svg class="ic" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg><span>الإعدادات</span></button>
+    </div>
+  </div>
+
+  <!-- الإعدادات -->
+  <div class="overlay" id="settings" hidden>
+    <div class="modal">
+      <div class="mhead"><h2>الإعدادات</h2><span class="sub">إدارة اسمك، صورتك، وحسابك.</span></div>
+      <div class="prof">
+        <div class="avatar big" id="s-avatar"></div>
+        <div class="col">
+          <button type="button" class="ghost" id="change-photo">تغيير الصورة</button>
+          <button type="button" class="ghost" id="remove-photo">إزالة الصورة</button>
+        </div>
+        <div class="col grow">
+          <input id="s-name" type="text" maxlength="30" autocomplete="off">
+          <button type="button" id="save-name">حفظ</button>
+        </div>
+      </div>
+      <hr>
+      <button type="button" class="item" id="logout"><svg class="ic" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg><span>تسجيل الخروج</span></button>
+      <button type="button" class="item" id="reset-counters"><svg class="ic" viewBox="0 0 24 24"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg><span>تصفير العدادات</span></button>
+      <button type="button" class="item danger" id="delete-account"><svg class="ic" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg><span>حذف الحساب</span></button>
+      <button type="button" class="ghost wide" id="close-settings">إغلاق</button>
+    </div>
+  </div>
+
+  <!-- تعديل ظهور الصورة -->
+  <div class="overlay" id="adjust" hidden>
+    <div class="modal">
+      <h2>تعديل ظهور الصورة</h2>
+      <p class="sub">اسحب الصورة لتحريكها، وحرّك الأشرطة للتكبير والتدوير قبل إدراجها.</p>
+      <div class="cropwrap"><canvas id="crop" width="240" height="240"></canvas></div>
+      <p class="hint">اسحب داخل الدائرة لتحريك الصورة</p>
+      <div class="sliders">
+        <label class="sl"><svg class="ic" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg><input type="range" id="zoom" min="1" max="3" step="0.01" value="1"></label>
+        <label class="sl"><svg class="ic" viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg><input type="range" id="rot" min="-180" max="180" step="1" value="0"></label>
+      </div>
+      <div class="acts">
+        <button type="button" class="ghost" id="cancel-photo">إلغاء</button>
+        <button type="button" id="insert-photo">إدراج الصورة</button>
+      </div>
+    </div>
+  </div>
+  <input type="file" id="file" accept="image/*" hidden>
 
   <script>
-    // تخزين المحاربين في المتصفح: { الكود: بياناته }
-    var KEY = "muharib_users";
+    var KEY = "muharib_users", CUR = "muharib_current";
+    function $(id) { return document.getElementById(id); }
     function allUsers() {
       try { return JSON.parse(localStorage.getItem(KEY)) || {}; }
       catch (e) { return {}; }
     }
+    function saveUsers(u) { localStorage.setItem(KEY, JSON.stringify(u)); }
     function newCode(users) {
       var letters = "ABCDEFGHJKLMNPQRSTUVWXYZ", code;
       do {
@@ -131,46 +223,212 @@ button.full { width: 100%; }
       return code;
     }
 
-    var signupView = document.getElementById("view-signup");
-    var returningView = document.getElementById("view-returning");
+    var signupView = $("view-signup"), returningView = $("view-returning"), appView = $("view-app");
+    var currentCode = null, pendingCode = null;
 
-    function showEmpty() {
-      signupView.hidden = true;
+    function showSignup() {
+      appView.hidden = true;
       returningView.hidden = true;
+      signupView.hidden = false;
+      $("signup").reset();
+      $("signup").hidden = false;
+      $("intro").hidden = false;
+      $("done").hidden = true;
+      $("code").value = "";
+      $("err").textContent = "";
     }
 
-    document.getElementById("go-returning").addEventListener("click", function (e) {
+    function paintAvatar(el, u) {
+      if (u.avatar) { el.style.backgroundImage = 'url("' + u.avatar + '")'; el.textContent = ""; }
+      else { el.style.backgroundImage = "none"; el.textContent = u.name.charAt(0); }
+    }
+
+    function renderUser() {
+      var u = allUsers()[currentCode];
+      if (!u) { showSignup(); return; }
+      $("u-name").textContent = u.name;
+      $("u-code").textContent = currentCode;
+      paintAvatar($("avatar"), u);
+      paintAvatar($("s-avatar"), u);
+      $("s-name").value = u.name;
+    }
+
+    function enterApp(code) {
+      currentCode = code;
+      localStorage.setItem(CUR, code);
+      signupView.hidden = true;
+      returningView.hidden = true;
+      appView.hidden = false;
+      renderUser();
+    }
+
+    // ---- التسجيل والعودة ----
+    $("go-returning").addEventListener("click", function (e) {
       e.preventDefault();
       signupView.hidden = true;
       returningView.hidden = false;
     });
 
-    document.getElementById("signup").addEventListener("submit", function (e) {
+    $("back").addEventListener("click", function () {
+      returningView.hidden = true;
+      signupView.hidden = false;
+      $("code").value = "";
+      $("err").textContent = "";
+    });
+
+    $("signup").addEventListener("submit", function (e) {
       e.preventDefault();
-      var name = document.getElementById("name").value.trim();
-      var why = document.getElementById("why").value.trim();
+      var name = $("name").value.trim();
+      var why = $("why").value.trim();
       if (!name || !why) return;
       var users = allUsers();
       var code = newCode(users);
       users[code] = { name: name, why: why };
-      localStorage.setItem(KEY, JSON.stringify(users));
-      document.getElementById("newcode").textContent = code;
-      document.getElementById("signup").hidden = true;
-      document.getElementById("intro").hidden = true;
-      document.getElementById("done").hidden = false;
+      saveUsers(users);
+      pendingCode = code;
+      $("newcode").textContent = code;
+      $("signup").hidden = true;
+      $("intro").hidden = true;
+      $("done").hidden = false;
     });
 
-    document.getElementById("go-empty").addEventListener("click", showEmpty);
+    $("go-empty").addEventListener("click", function () { enterApp(pendingCode); });
 
-    document.getElementById("returning").addEventListener("submit", function (e) {
+    $("returning").addEventListener("submit", function (e) {
       e.preventDefault();
-      var code = document.getElementById("code").value.trim().toUpperCase();
+      var code = $("code").value.trim().toUpperCase();
       if (allUsers()[code]) {
-        showEmpty();
+        enterApp(code);
       } else {
-        document.getElementById("err").textContent = "الرمز غير صحيح";
+        $("err").textContent = "الرمز غير صحيح";
       }
     });
+
+    // ---- الإعدادات ----
+    $("open-settings").addEventListener("click", function () {
+      renderUser();
+      $("settings").hidden = false;
+    });
+    $("close-settings").addEventListener("click", function () { $("settings").hidden = true; });
+
+    $("save-name").addEventListener("click", function () {
+      var name = $("s-name").value.trim();
+      if (!name) return;
+      var users = allUsers();
+      users[currentCode].name = name;
+      saveUsers(users);
+      renderUser();
+    });
+
+    $("remove-photo").addEventListener("click", function () {
+      var users = allUsers();
+      delete users[currentCode].avatar;
+      saveUsers(users);
+      renderUser();
+    });
+
+    $("logout").addEventListener("click", function () {
+      localStorage.removeItem(CUR);
+      currentCode = null;
+      $("settings").hidden = true;
+      showSignup();
+    });
+
+    $("reset-counters").addEventListener("click", function () {
+      if (!confirm("تصفير العدادات؟")) return;
+      var users = allUsers();
+      users[currentCode].counters = {};
+      saveUsers(users);
+    });
+
+    $("delete-account").addEventListener("click", function () {
+      if (!confirm("حذف الحساب نهائياً؟")) return;
+      var users = allUsers();
+      delete users[currentCode];
+      saveUsers(users);
+      localStorage.removeItem(CUR);
+      currentCode = null;
+      $("settings").hidden = true;
+      showSignup();
+    });
+
+    // ---- تعديل ظهور الصورة ----
+    var cv = $("crop"), SIZE = 240, img = null, st = { x: 0, y: 0, zoom: 1, rot: 0 };
+
+    function draw(c, size) {
+      var k = size / SIZE, g = c.getContext("2d");
+      g.fillStyle = "#0a0a0a";
+      g.fillRect(0, 0, size, size);
+      if (!img) return;
+      var base = Math.max(SIZE / img.width, SIZE / img.height) * st.zoom * k;
+      g.save();
+      g.translate(size / 2 + st.x * k, size / 2 + st.y * k);
+      g.rotate(st.rot * Math.PI / 180);
+      g.scale(base, base);
+      g.drawImage(img, -img.width / 2, -img.height / 2);
+      g.restore();
+    }
+
+    $("change-photo").addEventListener("click", function () { $("file").click(); });
+
+    $("file").addEventListener("change", function () {
+      var f = this.files[0];
+      if (!f) return;
+      var url = URL.createObjectURL(f);
+      var im = new Image();
+      im.onload = function () {
+        img = im;
+        st = { x: 0, y: 0, zoom: 1, rot: 0 };
+        $("zoom").value = 1;
+        $("rot").value = 0;
+        draw(cv, SIZE);
+        $("settings").hidden = true;
+        $("adjust").hidden = false;
+      };
+      im.src = url;
+    });
+
+    $("zoom").addEventListener("input", function () { st.zoom = parseFloat(this.value); draw(cv, SIZE); });
+    $("rot").addEventListener("input", function () { st.rot = parseFloat(this.value); draw(cv, SIZE); });
+
+    var drag = null;
+    cv.addEventListener("pointerdown", function (e) {
+      drag = { x: e.clientX, y: e.clientY };
+      cv.setPointerCapture(e.pointerId);
+    });
+    cv.addEventListener("pointermove", function (e) {
+      if (!drag) return;
+      var r = cv.getBoundingClientRect(), s = SIZE / r.width;
+      st.x += (e.clientX - drag.x) * s;
+      st.y += (e.clientY - drag.y) * s;
+      drag = { x: e.clientX, y: e.clientY };
+      draw(cv, SIZE);
+    });
+    cv.addEventListener("pointerup", function () { drag = null; });
+    cv.addEventListener("pointercancel", function () { drag = null; });
+
+    function closeAdjust() {
+      $("adjust").hidden = true;
+      $("file").value = "";
+      img = null;
+      $("settings").hidden = false;
+    }
+    $("cancel-photo").addEventListener("click", closeAdjust);
+
+    $("insert-photo").addEventListener("click", function () {
+      var out = document.createElement("canvas");
+      out.width = out.height = 256;
+      draw(out, 256);
+      var users = allUsers();
+      users[currentCode].avatar = out.toDataURL("image/jpeg", 0.85);
+      saveUsers(users);
+      closeAdjust();
+      renderUser();
+    });
+
+    // استعادة الجلسة
+    var saved = localStorage.getItem(CUR);
+    if (saved && allUsers()[saved]) enterApp(saved);
   </script>
 </body>
 </html>
