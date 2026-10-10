@@ -125,23 +125,21 @@ input[type=range] { direction: ltr; flex: 1; min-width: 0; padding: 0; margin: 0
 #view-signup label { font-size: .84rem; margin-bottom: 3px; }
 #view-signup input, #view-signup textarea { font-size: .9rem; padding: 6px 9px; margin-bottom: 9px; }
 #view-signup button { font-size: .9rem; padding: 8px 14px; }
-.card { margin-top: 8px; background: var(--panel); border: 1px solid var(--panel-border); border-radius: 8px; padding: 8px 10px; }
-.ctitle { font-size: .8rem; color: var(--muted); margin-bottom: 6px; }
-.ribat { display: flex; align-items: center; gap: 10px; }
-.flame { width: 64px; height: 64px; flex: none; }
-.flame .f-out { fill: var(--accent); }
-.flame .f-shade { fill: rgba(0,0,0,.2); }
+.card { width: 50%; aspect-ratio: 1 / 1; margin-top: 8px; padding: 10px; display: flex; flex-direction: column; background: var(--panel); border: 1px solid var(--panel-border); border-radius: 22px; }
+.chead { display: flex; align-items: center; justify-content: space-between; gap: 6px; }
+.ctitle { font-size: .82rem; color: var(--muted); }
+.tag { font-size: .7rem; color: var(--muted); border: 1px solid var(--panel-border); border-radius: 10px; padding: 0 8px; }
+.flame { flex: 1 1 0; min-height: 0; width: 100%; }
+.flame .g1 { stop-color: #efe3c4; }
+.flame .g2 { stop-color: #cdb98f; }
+.flame .f-out { fill: url(#fg); }
 .flame .f-in { fill: #0a0a0a; }
 .flame text { fill: var(--accent); font-weight: 700; }
-.flame.on { filter: drop-shadow(0 0 5px rgba(226,211,176,.3)); }
-.flame.frozen .f-out { fill: #3d392f; }
-.flame.frozen .f-shade { fill: rgba(0,0,0,.25); }
-.flame.frozen .f-in { fill: #141414; }
-.flame.frozen text { fill: #6f6652; }
-.tag { font-size: .72rem; color: var(--muted); border: 1px solid var(--panel-border); border-radius: 10px; padding: 1px 9px; }
-.usage { margin-inline-start: auto; display: flex; flex-direction: column; align-items: flex-start; }
-.usage b { font-size: 1.15rem; color: var(--text); font-weight: 600; line-height: 1.2; }
-.usage span { font-size: .72rem; color: var(--muted); }
+.flame.on { filter: drop-shadow(0 0 7px rgba(226,211,176,.28)); }
+.flame.frozen .g1 { stop-color: #4a453a; }
+.flame.frozen .g2 { stop-color: #2e2b24; }
+.flame.frozen .f-in { fill: #0f0f0f; }
+.flame.frozen text { fill: #7d725a; }
 [hidden] { display: none !important; }
 
   </style>
@@ -197,17 +195,21 @@ input[type=range] { direction: ltr; flex: 1; min-width: 0; padding: 0; margin: 0
       <button type="button" class="ghost pill" id="open-settings"><svg class="ic" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg><span>الإعدادات</span></button>
     </div>
     <div class="card">
-      <div class="ctitle">أيام الرباط</div>
-      <div class="ribat">
-        <svg class="flame on" id="flame" viewBox="0 0 64 64">
-          <path class="f-out" d="M32 4 L40 18 L47 26 L51 38 L46 50 L38 58 L26 58 L18 50 L13 38 L17 28 L22 34 L26 20 Z"/>
-          <path class="f-shade" d="M32 4 L26 20 L22 34 L17 28 L13 38 L18 50 L26 58 L32 58 Z"/>
-          <path class="f-in" d="M32 22 L40 32 L43 42 L38 51 L32 54 L26 51 L21 42 L24 32 Z"/>
-          <text id="f-num" x="32" y="39" text-anchor="middle" dominant-baseline="central" font-size="17">1</text>
-        </svg>
+      <div class="chead">
+        <div class="ctitle">أيام الرباط</div>
         <span class="tag" id="r-state" hidden>مجمّد</span>
-        <div class="usage"><b id="r-days">1</b><span>أيام الاستخدام</span></div>
       </div>
+      <svg class="flame on" id="flame" viewBox="14 2 72 98" preserveAspectRatio="xMidYMid meet">
+        <defs>
+          <linearGradient id="fg" x1="0" y1="0" x2="0" y2="1">
+            <stop class="g1" offset="0"/>
+            <stop class="g2" offset="1"/>
+          </linearGradient>
+        </defs>
+        <path class="f-out" d="M50 6 C52 22 74 34 78 58 C82 82 66 96 50 96 C34 96 18 84 22 62 C24 50 32 44 36 34 C40 42 42 48 46 46 C50 40 46 22 50 6 Z"/>
+        <path class="f-in" transform="translate(25 40) scale(.5)" d="M50 6 C52 22 74 34 78 58 C82 82 66 96 50 96 C34 96 18 84 22 62 C24 50 32 44 36 34 C40 42 42 48 46 46 C50 40 46 22 50 6 Z"/>
+        <text id="f-num" x="50" y="69" text-anchor="middle" dominant-baseline="central" font-size="20">1</text>
+      </svg>
     </div>
   </div>
 
@@ -335,8 +337,7 @@ input[type=range] { direction: ltr; flex: 1; min-width: 0; padding: 0; margin: 0
       $("flame").setAttribute("class", "flame " + (r.frozen ? "frozen" : "on"));
       var n = $("f-num"), len = String(r.streak).length;
       n.textContent = r.streak;
-      n.setAttribute("font-size", len <= 2 ? 17 : (len === 3 ? 13 : 10));
-      $("r-days").textContent = r.days;
+      n.setAttribute("font-size", len <= 2 ? 20 : (len === 3 ? 15 : 11));
       $("r-state").hidden = !r.frozen;
     }
 
