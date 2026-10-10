@@ -1,0 +1,234 @@
+/* ===== مُحارِب — الألوان: أحمر / رمادي / بيج ===== */
+:root {
+  --beige: #eadfc8;
+  --beige-light: #f5eedd;
+  --beige-dark: #d8c9a8;
+  --gray: #5a5a5a;
+  --gray-dark: #2f2f2f;
+  --gray-light: #9a9a9a;
+  --red: #b3261e;
+  --red-dark: #8c1d17;
+  --radius: 14px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+}
+
+body {
+  background: var(--beige);
+  color: var(--gray-dark);
+  font-family: "Tajawal", "Segoe UI", Tahoma, "Noto Naskh Arabic", sans-serif;
+  line-height: 1.7;
+}
+
+/* ===== صفحة تسجيل الدخول ===== */
+.login-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 16px;
+  background:
+    linear-gradient(160deg, var(--beige) 55%, var(--beige-dark) 100%);
+}
+
+.card {
+  width: 100%;
+  max-width: 460px;
+  background: var(--beige-light);
+  border: 2px solid var(--gray);
+  border-top: 8px solid var(--red);
+  border-radius: var(--radius);
+  padding: 28px 24px 24px;
+  box-shadow: 0 10px 30px rgba(47, 47, 47, 0.18);
+}
+
+.emblem {
+  display: flex;
+  justify-content: center;
+  color: var(--red);
+  margin-bottom: 6px;
+}
+
+h1 {
+  margin: 0 0 8px;
+  text-align: center;
+  font-size: 1.7rem;
+  color: var(--red);
+}
+
+.intro {
+  margin: 0 0 22px;
+  text-align: center;
+  color: var(--gray);
+  font-size: 0.98rem;
+}
+
+label {
+  display: block;
+  margin: 14px 0 6px;
+  font-weight: 700;
+  color: var(--gray-dark);
+}
+
+input,
+textarea {
+  width: 100%;
+  padding: 11px 12px;
+  font: inherit;
+  color: var(--gray-dark);
+  background: #fff;
+  border: 2px solid var(--gray-light);
+  border-radius: 10px;
+  outline: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+textarea {
+  resize: vertical;
+}
+
+input:focus,
+textarea:focus {
+  border-color: var(--red);
+  box-shadow: 0 0 0 3px rgba(179, 38, 30, 0.18);
+}
+
+.code-input {
+  text-align: center;
+  font-size: 1.5rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+}
+
+.btn {
+  display: block;
+  width: 100%;
+  margin-top: 18px;
+  padding: 12px 16px;
+  font: inherit;
+  font-weight: 700;
+  border: 2px solid transparent;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.15s, transform 0.05s;
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+
+.btn-primary {
+  background: var(--red);
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background: var(--red-dark);
+}
+
+.btn-secondary {
+  background: var(--gray);
+  color: #fff;
+}
+
+.btn-secondary:hover {
+  background: var(--gray-dark);
+}
+
+.btn-link {
+  margin-top: 0;
+  background: transparent;
+  color: var(--red);
+  border-color: var(--red);
+}
+
+.btn-link:hover {
+  background: rgba(179, 38, 30, 0.08);
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 22px 0 16px;
+  color: var(--gray-light);
+}
+
+.divider::before,
+.divider::after {
+  content: "";
+  flex: 1;
+  height: 2px;
+  background: var(--beige-dark);
+}
+
+.error {
+  margin: 10px 0 0;
+  padding: 8px 10px;
+  color: var(--red-dark);
+  background: rgba(179, 38, 30, 0.1);
+  border-right: 4px solid var(--red);
+  border-radius: 6px;
+  font-size: 0.92rem;
+}
+
+/* ===== نافذة الكود ===== */
+.overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  background: rgba(47, 47, 47, 0.7);
+  z-index: 10;
+}
+
+.modal {
+  width: 100%;
+  max-width: 400px;
+  padding: 26px 22px;
+  text-align: center;
+  background: var(--beige-light);
+  border: 2px solid var(--gray);
+  border-top: 8px solid var(--red);
+  border-radius: var(--radius);
+}
+
+.modal h2 {
+  margin: 0 0 10px;
+  color: var(--red);
+}
+
+.code-box {
+  margin: 16px auto 4px;
+  padding: 12px 0;
+  max-width: 220px;
+  font-size: 2.4rem;
+  font-weight: 800;
+  letter-spacing: 0.3em;
+  padding-left: 0.3em;
+  color: #fff;
+  background: var(--gray-dark);
+  border-radius: 10px;
+}
+
+/* ===== الواجهة الفارغة ===== */
+.empty-page {
+  min-height: 100vh;
+  background: var(--beige);
+}
