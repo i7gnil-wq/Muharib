@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>مُحارِب</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+:root {
+  --bg: #0a0a0a;
+  --panel: #141414;
+  --panel-border: #5c5240;
+  --field: #0a0a0a;
+  --field-border: #4a4235;
+  --text: #d8c8a8;
+  --muted: #9a8c72;
+  --btn-blue: #cdb98f;
+  --btn-gray: #e2d3b0;
+  --btn-text: #0a0a0a;
+  --accent: #e2d3b0;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background:
+    linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px) 0 0 / 22px 22px,
+    linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px) 0 0 / 22px 22px,
+    radial-gradient(ellipse at top, #1a1a1a 0%, var(--bg) 70%);
+  background-attachment: fixed;
+  color: var(--text);
+  font-family: "IBM Plex Sans Arabic", Tahoma, Arial, sans-serif;
+  direction: rtl;
+  text-align: right;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.box {
+  width: 100%; max-width: 225px; padding: 8px 9px; margin: 8px auto; opacity: 1;
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+  border-radius: 6px;
+}
+h1 { font-size: .92rem; font-weight: 600; margin: 0 0 4px; color: var(--text); }
+p { margin: 0 0 9px; line-height: 1.45; font-size: .72rem; }
+label { display: block; font-size: .7rem; margin-bottom: 2px; color: var(--muted); }
+input {
+  width: 100%; padding: 2px 6px; margin-bottom: 5px; font-size: .74rem;
+  background: var(--field); color: var(--text);
+  border: 1px solid var(--field-border); border-radius: 4px;
+  font: inherit; font-size: .74rem; direction: rtl; text-align: right;
+}
+input:focus { outline: 1px solid var(--btn-blue); }
+button {
+  background: var(--btn-blue); color: var(--btn-text);
+  border: 1px solid #cdb98f; padding: 3px 10px; font: inherit; font-size: .74rem;
+  cursor: pointer; border-radius: 4px;
+}
+button:hover { background: var(--btn-gray); }
+button.full { width: 100%; }
+.old { color: var(--accent); font-weight: 600; margin: 10px 0 0; }
+.old a { color: var(--accent); text-decoration: underline; }
+.err { color: var(--accent); font-size: .72rem; min-height: 1.2em; margin: 0 0 8px; }
+.code { font-size: 1.15rem; letter-spacing: 3px; direction: ltr; text-align: right; margin: 0 0 12px; }
+[hidden] { display: none !important; }
+
+  </style>
+</head>
+<body>
+
+  <!-- الواجهة الأولى: التسجيل -->
+  <main class="box" id="view-signup">
+    <div id="intro">
+      <h1>أهلا بالمحارب الجديد!</h1>
+      <p>"محارب" هي منصة للنصر في حرب الإدمان عن طريق تدريبات ومتابعات، هل انت مستعد لخوض خِضَم الحروب؟ هيا بنا!</p>
+    </div>
+
+    <form id="signup">
+      <label for="name">اسم المحارب:</label>
+      <input id="name" type="text" required autocomplete="off">
+      <label for="why">لماذا تحارب؟</label>
+      <input id="why" type="text" required autocomplete="off">
+      <button type="submit" class="full">إلى الحرب!</button>
+      <p class="old">محارب قديم؟ <a href="#" id="go-returning">عُد إلى صفوف الحرب!</a></p>
+    </form>
+
+    <div id="done" hidden>
+      <h1>كودك:</h1>
+      <p class="code" id="newcode"></p>
+      <p>احتفظ به، ستحتاجه للعودة.</p>
+      <button type="button" id="go-empty">متابعة</button>
+    </div>
+  </main>
+
+  <!-- واجهة المحارب القديم -->
+  <main class="box" id="view-returning" hidden>
+    <form id="returning">
+      <label for="code">الرمز الحربي:</label>
+      <input id="code" type="text" maxlength="3" required autocomplete="off">
+      <p class="err" id="err"></p>
+      <button type="submit" class="full">دخول</button>
+    </form>
+  </main>
+
+  <!-- الواجهة الفارغة: لا يوجد داخلها شيء -->
+
+  <script>
+    // تخزين المحاربين في المتصفح: { الكود: بياناته }
+    var KEY = "muharib_users";
+    function allUsers() {
+      try { return JSON.parse(localStorage.getItem(KEY)) || {}; }
+      catch (e) { return {}; }
+    }
+    function newCode(users) {
+      var letters = "ABCDEFGHJKLMNPQRSTUVWXYZ", code;
+      do {
+        code = letters[Math.floor(Math.random() * letters.length)] +
+               String(Math.floor(Math.random() * 100)).padStart(2, "0");
+      } while (users[code]);
+      return code;
+    }
+
+    var signupView = document.getElementById("view-signup");
+    var returningView = document.getElementById("view-returning");
+
+    function showEmpty() {
+      signupView.hidden = true;
+      returningView.hidden = true;
+    }
+
+    document.getElementById("go-returning").addEventListener("click", function (e) {
+      e.preventDefault();
+      signupView.hidden = true;
+      returningView.hidden = false;
+    });
+
+    document.getElementById("signup").addEventListener("submit", function (e) {
+      e.preventDefault();
+      var name = document.getElementById("name").value.trim();
+      var why = document.getElementById("why").value.trim();
+      if (!name || !why) return;
+      var users = allUsers();
+      var code = newCode(users);
+      users[code] = { name: name, why: why };
+      localStorage.setItem(KEY, JSON.stringify(users));
+      document.getElementById("newcode").textContent = code;
+      document.getElementById("signup").hidden = true;
+      document.getElementById("intro").hidden = true;
+      document.getElementById("done").hidden = false;
+    });
+
+    document.getElementById("go-empty").addEventListener("click", showEmpty);
+
+    document.getElementById("returning").addEventListener("submit", function (e) {
+      e.preventDefault();
+      var code = document.getElementById("code").value.trim().toUpperCase();
+      if (allUsers()[code]) {
+        showEmpty();
+      } else {
+        document.getElementById("err").textContent = "الكود غير صحيح";
+      }
+    });
+  </script>
+</body>
+</html>
