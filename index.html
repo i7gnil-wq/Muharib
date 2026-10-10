@@ -65,6 +65,10 @@ button.full { width: 100%; }
 .old { color: var(--accent); font-weight: 600; margin: 10px 0 0; }
 .old a { color: var(--accent); text-decoration: underline; }
 .err { color: var(--accent); font-size: .76rem; min-height: 1.2em; margin: 0 0 8px; }
+.line { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+.line label { margin: 0; white-space: nowrap; }
+.line input { margin: 0; flex: 1; min-width: 0; }
+.err:empty { display: none; }
 .row { display: flex; align-items: baseline; gap: 8px; margin-bottom: 8px; }
 .row h1 { margin: 0; }
 .code { font-size: 1.25rem; letter-spacing: 3px; direction: ltr; text-align: right; margin: 0; }
@@ -100,8 +104,10 @@ button.full { width: 100%; }
   <!-- واجهة المحارب القديم -->
   <main class="box" id="view-returning" hidden>
     <form id="returning">
-      <label for="code">الرمز الحربي:</label>
-      <input id="code" type="text" maxlength="3" required autocomplete="off">
+      <div class="line">
+        <label for="code">الرمز الحربي:</label>
+        <input id="code" type="text" maxlength="3" required autocomplete="off">
+      </div>
       <p class="err" id="err"></p>
       <button type="submit" class="full">دخول</button>
     </form>
@@ -162,7 +168,7 @@ button.full { width: 100%; }
       if (allUsers()[code]) {
         showEmpty();
       } else {
-        document.getElementById("err").textContent = "الكود غير صحيح";
+        document.getElementById("err").textContent = "الرمز غير صحيح";
       }
     });
   </script>
