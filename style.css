@@ -12,7 +12,7 @@
   --accent: #9fb3cf;
 }
 * { box-sizing: border-box; }
-html, body { margin: 0; min-height: 100%; }
+html, body { margin: 0; }
 body {
   background:
     linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px) 0 0 / 22px 22px,
@@ -23,32 +23,35 @@ body {
   font-family: "Segoe UI", Tahoma, Arial, sans-serif;
   direction: rtl;
   text-align: right;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
 }
 .box {
-  max-width: 290px; padding: 11px 12px; margin: 8px;
+  width: 100%; max-width: 260px; padding: 10px 11px; margin: 8px;
   background: var(--panel);
   border: 1px solid var(--panel-border);
   border-radius: 6px;
 }
-h1 { font-size: 1.05rem; font-weight: 600; margin: 0 0 4px; color: var(--text); }
-p { margin: 0 0 9px; line-height: 1.55; font-size: .82rem; }
-label { display: block; font-size: .8rem; margin-bottom: 2px; color: var(--muted); }
+h1 { font-size: 1rem; font-weight: 600; margin: 0 0 4px; color: var(--text); }
+p { margin: 0 0 9px; line-height: 1.5; font-size: .78rem; }
+label { display: block; font-size: .76rem; margin-bottom: 2px; color: var(--muted); }
 input {
-  width: 100%; padding: 4px 8px; margin-bottom: 7px; font-size: .85rem;
+  width: 100%; padding: 3px 7px; margin-bottom: 6px; font-size: .8rem;
   background: var(--field); color: var(--text);
   border: 1px solid var(--field-border); border-radius: 4px;
-  font: inherit; font-size: .85rem; direction: rtl; text-align: right;
+  font: inherit; font-size: .8rem; direction: rtl; text-align: right;
 }
 input:focus { outline: 1px solid var(--btn-blue); }
 button {
   background: var(--btn-blue); color: var(--btn-text);
-  border: 1px solid #6f88a6; padding: 5px 14px; font: inherit; font-size: .85rem;
+  border: 1px solid #6f88a6; padding: 4px 12px; font: inherit; font-size: .8rem;
   cursor: pointer; border-radius: 4px;
 }
 button:hover { background: var(--btn-gray); }
 button.full { width: 100%; }
 .old { color: var(--accent); font-weight: 600; margin: 10px 0 0; }
 .old a { color: var(--accent); text-decoration: underline; }
-.err { color: var(--accent); font-size: .85rem; min-height: 1.2em; margin: 0 0 8px; }
-.code { font-size: 1.4rem; letter-spacing: 3px; direction: ltr; text-align: right; margin: 0 0 12px; }
+.err { color: var(--accent); font-size: .78rem; min-height: 1.2em; margin: 0 0 8px; }
+.code { font-size: 1.3rem; letter-spacing: 3px; direction: ltr; text-align: right; margin: 0 0 12px; }
 [hidden] { display: none !important; }
