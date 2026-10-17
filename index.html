@@ -6,7 +6,7 @@
   <title>مُحارِب</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600&family=Reem+Kufi:wght@600&display=swap" rel="stylesheet">
   <style>
 :root {
   --bg: #0a0a0a;
@@ -134,7 +134,7 @@ input[type=range] { direction: ltr; flex: 1; min-width: 0; padding: 0; margin: 0
 .flame .g2 { stop-color: #cdb98f; }
 .flame .f-out { fill: url(#fg); }
 .flame .f-in { fill: #0a0a0a; }
-.flame text { fill: var(--accent); font-weight: 700; }
+.flame text { fill: var(--accent); font-weight: 600; font-family: "Reem Kufi", "IBM Plex Sans Arabic", sans-serif; }
 .flame.on { filter: drop-shadow(0 0 7px rgba(226,211,176,.28)); }
 .flame.frozen .g1 { stop-color: #4a453a; }
 .flame.frozen .g2 { stop-color: #2e2b24; }
@@ -208,7 +208,7 @@ input[type=range] { direction: ltr; flex: 1; min-width: 0; padding: 0; margin: 0
         </defs>
         <path class="f-out" d="M50 6 C52 22 74 34 78 58 C82 82 66 96 50 96 C34 96 18 84 22 62 C24 50 32 44 36 34 C40 42 42 48 46 46 C50 40 46 22 50 6 Z"/>
         <path class="f-in" transform="translate(25 40) scale(.5)" d="M50 6 C52 22 74 34 78 58 C82 82 66 96 50 96 C34 96 18 84 22 62 C24 50 32 44 36 34 C40 42 42 48 46 46 C50 40 46 22 50 6 Z"/>
-        <text id="f-num" x="50" y="69" text-anchor="middle" dominant-baseline="central" font-size="20">1</text>
+        <text id="f-num" x="50" y="69" text-anchor="middle" dominant-baseline="central" font-size="14">1</text>
       </svg>
     </div>
   </div>
@@ -337,7 +337,7 @@ input[type=range] { direction: ltr; flex: 1; min-width: 0; padding: 0; margin: 0
       $("flame").setAttribute("class", "flame " + (r.frozen ? "frozen" : "on"));
       var n = $("f-num"), len = String(r.streak).length;
       n.textContent = r.streak;
-      n.setAttribute("font-size", len <= 2 ? 20 : (len === 3 ? 15 : 11));
+      n.setAttribute("font-size", len <= 2 ? 14 : (len === 3 ? 11 : 8));
       $("r-state").hidden = !r.frozen;
     }
 
